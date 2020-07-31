@@ -23,7 +23,9 @@ const fetchCoordsByIP = function (ip, callback) {
       callback(err);
       return;
     }
-    callback(null, body);
+    const { latitude, longitude } = JSON.parse(body).data;
+    const data = { latitude, longitude, };
+    callback(null, data);
   });
 };
 
