@@ -1,4 +1,4 @@
-const { /*fetchMyIP, fetchCoordsByIP, fetchISSFlyOverTimes,*/ nextISSTimesForMyLocation } = require("./iss");
+const { fetchMyIP, fetchCoordsByIP, fetchISSFlyOverTimes, nextISSTimesForMyLocation, convertPrint } = require("./iss");
 
 /**
  * Makes a single API request to retrieve the user's IP address.
@@ -39,10 +39,38 @@ const { /*fetchMyIP, fetchCoordsByIP, fetchISSFlyOverTimes,*/ nextISSTimesForMyL
 //   console.log("It worked! ISS flies over at time:  \n", time);
 // });
 
+
 nextISSTimesForMyLocation((error, passTimes) => {
+
   if (error) {
     return console.log("It didn't work!", error);
   }
 
   console.log(passTimes);
-})
+});
+
+
+// const convertPrint = arrayOfTimes => {
+//   for (let time of arrayOfTimes) {
+//     console.log(`Next pass at ${Date(time.risetime).toUTCString()}`);
+//   }
+// };
+
+
+fetchMyIP((err, ip) => {
+  if (err) return `It's not working! ${err}`;
+  fetchCoordsByIP(ip, (error, coords) => {
+    if (error) return `It didn't work! ${error}`;
+    fetchISSFlyOverTimes(coords, (error, passTimes) => {
+      if (error) return `It didn't work! ${error}`;
+
+      convertPrint(passTimes);
+    });
+  });
+});
+
+
+// nextISSTimesForMyLocation((error, passTimes) => {
+//   if (error) return `It didn't work! ${error}`;
+//   console.log(passTimes);
+// });

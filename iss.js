@@ -51,8 +51,22 @@ const fetchISSFlyOverTimes = function (coords, callback) {
   });
 };
 
+const convertPrint = arrayOfTimes => {
+  console.log(arrayOfTimes);
+
+  for (let time of arrayOfTimes) {
+    const datetime = new Date(0);
+    datetime.setUTCSeconds(time.risetime);
+    console.log(datetime.toString());
+
+    //console.log(`Next pass at ${datetime.setUTCSeconds(time.risetime)}`);
+  }
+}
+
+
+
 const nextISSTimesForMyLocation = function (callback) {
-  
+  //empty for now
 };
   
 
@@ -60,4 +74,6 @@ module.exports = {
   fetchMyIP,
   fetchCoordsByIP,
   fetchISSFlyOverTimes,
+  nextISSTimesForMyLocation,
+  convertPrint,
 };
