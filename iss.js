@@ -18,8 +18,12 @@ const fetchMyIP = function (callback) {
 
 const fetchCoordsByIP = function (ip, callback) {
   let requestURL = "https://ipvigilante.com/" + ip;
-  request(requestURL, () => {
-    
+  request(requestURL, (err, response, body) => {
+    if (err) {
+      callback(err);
+      return;
+    }
+    callback(null, body);
   });
 };
 
