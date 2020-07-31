@@ -17,4 +17,20 @@ const fetchCoordsByIP = function (body) {
   return request(`https://ipvigilante.com/${ip}`);
 };
 
-module.exports = { fetchMyIP, fetchCoordsByIP };
+const fetchISSFlyOverTimes = function (body) {
+  const { latitude, longitude } = JSON.parse(body).data;
+  let coordsString = `lat=${latitude}&lon=${longitude}`;
+  return request(`http://api.open-notify.org/iss-pass.json?${coordsString}`);
+};
+
+const nextISSTimesForMyLocation = () => {
+  return fetchMyIP()
+    .then(fetchCoordsByIP)
+    .then(fetchISSFlyOverTimes)
+    .then((body) => {
+      const { response } = JSON.parse(body);
+      return response;
+    });
+};
+
+module.exports = { nextISSTimesForMyLocation };

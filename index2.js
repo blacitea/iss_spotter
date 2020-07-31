@@ -1,7 +1,11 @@
-const { fetchMyIP, fetchCoordsByIP } = require("./iss_promised");
+const { nextISSTimesForMyLocation } = require("./iss_promised");
 
-fetchMyIP()
-  .then(fetchCoordsByIP)
-  .then((body) => {
-    console.log(body);
+const { convertPrint } = require("./iss");
+
+nextISSTimesForMyLocation()
+  .then((timeArray) => {
+    convertPrint(timeArray);
+  })
+  .catch((error) => {
+    console.log("It's not working!", error.message);
   });
