@@ -55,9 +55,10 @@ const convertPrint = arrayOfTimes => {
   //console.log(arrayOfTimes);
 
   for (let time of arrayOfTimes) {
+    //console.log(time);
     const datetime = new Date(0);
     datetime.setUTCSeconds(time.risetime);
-    console.log(`Next pass at ${datetime.toString()} for ${time.duration} seconds.`);
+    console.log(`Next pass at ${datetime.toLocaleString("en-CA", {timeZone: "America/Vancouver", weekday: "short", month: "short", year: "numeric", day: "2-digit", hour: "2-digit", minute: "2-digit", second: "2-digit", timeZoneName: "long"}) } for ${time.duration} seconds.`);
 
     //console.log(`Next pass at ${datetime.setUTCSeconds(time.risetime)}`);
   }
