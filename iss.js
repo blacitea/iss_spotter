@@ -16,6 +16,14 @@ const fetchMyIP = function (callback) {
   });
 };
 
+const fetchCoordsByIP = function (ip, callback) {
+  let requestURL = "https://ipvigilante.com/" + ip;
+  request(requestURL, () => {
+    
+  });
+};
+
 module.exports = {
   fetchMyIP,
+  fetchCoordsByIP,
 };
