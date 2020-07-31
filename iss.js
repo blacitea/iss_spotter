@@ -8,8 +8,8 @@ const fetchMyIP = function (callback) {
       return;
     }
     if (response.statusCode !== 200) {
-      const msg = `Status Code ${response.statusCode} when fetching IP. Reponse: ${body}`;
-      callback(Error(msg), null);
+      const msgIP = `Status Code ${response.statusCode} when fetching IP. Reponse: ${body}`;
+      callback(Error(msgIP), null);
       return;
     }
     callback(null, JSON.parse(body).ip);
@@ -17,20 +17,22 @@ const fetchMyIP = function (callback) {
 };
 
 const fetchCoordsByIP = function (ip, callback) {
-  let requestURL = "https://ipvigilante.com/" + ip;
-  request(requestURL, (err, response, body) => {
+  //let requestURL = "https://ipvigilante.com/" + ip;
+  request(`https://ipvigilante.com/${ip}`, (err, response, body) => {
     if (err) {
-      callback(err);
+      callback(err, null);
       return;
     }
+
     if (response.statusCode !== 200) {
-      const msg = `Status Code ${response.statusCode} when fetching coordinates. Reponse: ${body}`;
-      callback(Error(msg), null);
+      const msgCoord = `Status Code ${response.statusCode} when fetching coordinates. Reponse: ${body}`;
+      callback(msgCoord, null);
       return;
     }
+
     const { latitude, longitude } = JSON.parse(body).data;
-    const data = { latitude, longitude, };
-    callback(null, data);
+
+    callback(null, { latitude, longitude, });
   });
 };
 

@@ -18,10 +18,10 @@ const { fetchMyIP, fetchCoordsByIP } = require("./iss");
 //   console.log("It worked! Returned IP:", ip);
 // });
 
-fetchCoordsByIP("invalid", (err, data) => {
-  if (err) {
-    console.log(err);
+fetchCoordsByIP("notIP", (error, coords) => {
+  if (error) {
+    console.log("It didn't work:", error);
     return;
   }
-  console.log(data);
+  console.log("It worked! Returned coordinates:", coords);
 });
