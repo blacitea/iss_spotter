@@ -5,10 +5,14 @@ const fetchMyIP = function (callback) {
   request("https://api.ipify.org?format=json", (err, response, body) => {
     if (err) {
       callback(err);
-    } else {
-      callback(null, JSON.parse(body).ip);
+      return;
     }
-    //if (response) console.log(response.statusCode);
+    if (response.statusCode !== 200) {
+      const msg = `Status Code ${response.statusCode} when fetching IP. Reponse: ${body}`;
+      callback(Error(msg), null);
+      return;
+    }
+    callback(null, JSON.parse(body).ip);
   });
 };
 
