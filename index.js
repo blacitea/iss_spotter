@@ -1,4 +1,4 @@
-const { fetchMyIP, fetchCoordsByIP, fetchISSFlyOverTimes, nextISSTimesForMyLocation, convertPrint } = require("./iss");
+const { fetchMyIP, fetchCoordsByIP, fetchISSFlyOverTimes, convertPrint } = require("./iss");
 
 /**
  * Makes a single API request to retrieve the user's IP address.
@@ -40,14 +40,9 @@ const { fetchMyIP, fetchCoordsByIP, fetchISSFlyOverTimes, nextISSTimesForMyLocat
 // });
 
 
-nextISSTimesForMyLocation((error, passTimes) => {
-
-  if (error) {
-    return console.log("It didn't work!", error);
-  }
-
-  console.log(passTimes);
-});
+const nextISSTimesForMyLocation = (timeArray, callback) => {
+  callback(timeArray);
+};
 
 
 // const convertPrint = arrayOfTimes => {
@@ -58,15 +53,27 @@ nextISSTimesForMyLocation((error, passTimes) => {
 
 
 fetchMyIP((err, ip) => {
-  if (err) return `It's not working! ${err}`;
-  fetchCoordsByIP(ip, (error, coords) => {
-    if (error) return `It didn't work! ${error}`;
-    fetchISSFlyOverTimes(coords, (error, passTimes) => {
-      if (error) return `It didn't work! ${error}`;
 
-      convertPrint(passTimes);
+  if (err) {
+    console.log(`It's not working! ${err}`);
+    return;
+  } else {
+    fetchCoordsByIP(ip, (error, coords) => {
+      if (error) {
+        console.log(`It didn't work! ${error}`);
+        return;
+      } else {
+        fetchISSFlyOverTimes(coords, (error, passTimes) => {
+          if (error) {
+            console.log(`It didn't work! ${error}`);
+            return;
+          } else {
+            nextISSTimesForMyLocation(passTimes, convertPrint);
+          }
+        });
+      }
     });
-  });
+  }
 });
 
 

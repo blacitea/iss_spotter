@@ -52,7 +52,7 @@ const fetchISSFlyOverTimes = function (coords, callback) {
 };
 
 const convertPrint = arrayOfTimes => {
-  console.log(arrayOfTimes);
+  //console.log(arrayOfTimes);
 
   for (let time of arrayOfTimes) {
     const datetime = new Date(0);
@@ -61,19 +61,30 @@ const convertPrint = arrayOfTimes => {
 
     //console.log(`Next pass at ${datetime.setUTCSeconds(time.risetime)}`);
   }
-}
-
-
-
-const nextISSTimesForMyLocation = function (callback) {
-  //empty for now
 };
+
+// nextISSTimesForMyLocation((error, passTimes) => {
+
+//   if (error) {
+//     return console.log("It didn't work!", error);
+//   }
+
+//   console.log(passTimes);
+// });
+
+// const nextISSTimesForMyLocation = function (error, callback) {
+//   //empty for now
+//   if (error) {
+//     return console.log("It didn't work!", error);
+//   }
+//   callback(passTimes);
+// };
   
 
 module.exports = {
   fetchMyIP,
   fetchCoordsByIP,
   fetchISSFlyOverTimes,
-  nextISSTimesForMyLocation,
+  //nextISSTimesForMyLocation,
   convertPrint,
 };
