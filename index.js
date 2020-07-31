@@ -1,4 +1,4 @@
-const { fetchMyIP, fetchCoordsByIP, fetchISSFlyOverTimes, convertPrint } = require("./iss");
+const { fetchMyIP, fetchCoordsByIP, fetchISSFlyOverTimes, convertPrint, printPassTimes } = require("./iss");
 
 /**
  * Makes a single API request to retrieve the user's IP address.
@@ -10,50 +10,13 @@ const { fetchMyIP, fetchCoordsByIP, fetchISSFlyOverTimes, convertPrint } = requi
  */
 
 
-// fetchMyIP((err, ip) => {
-//   if (err) {
-//     console.log("It didn't work:", err);
-//     return;
-//   }
-//   console.log("It worked! Returned IP:", ip);
-// });
-
-// fetchCoordsByIP("notIP", (error, coords) => {
-//   if (error) {
-//     console.log("It didn't work:", error);
-//     return;
-//   }
-//   console.log("It worked! Returned coordinates:", coords);
-// });
-
-// let coord = {
-//   "latitude": 49.26030,
-//   "longitude": -123.14600
-// };
-
-// fetchISSFlyOverTimes(coord, (error, time) => {
-//   if (error) {
-//     console.log("It didn't work:", error);
-//     return;
-//   }
-//   console.log("It worked! ISS flies over at time:  \n", time);
-// });
-
-
 const nextISSTimesForMyLocation = (timeArray, callback) => {
   callback(timeArray);
 };
 
 
-// const convertPrint = arrayOfTimes => {
-//   for (let time of arrayOfTimes) {
-//     console.log(`Next pass at ${Date(time.risetime).toUTCString()}`);
-//   }
-// };
-
 
 fetchMyIP((err, ip) => {
-
   if (err) {
     console.log(`It's not working! ${err}`);
     return;
@@ -68,7 +31,7 @@ fetchMyIP((err, ip) => {
             console.log(`It didn't work! ${error}`);
             return;
           } else {
-            nextISSTimesForMyLocation(passTimes, convertPrint);
+            nextISSTimesForMyLocation(passTimes, printPassTimes);
           }
         });
       }
