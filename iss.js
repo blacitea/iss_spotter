@@ -6,7 +6,7 @@ const fetchMyIP = function (callback) {
     if (err) {
       callback(err);
     } else {
-      callback(null, body);
+      callback(null, JSON.parse(body).ip);
     }
     //if (response) console.log(response.statusCode);
   });
