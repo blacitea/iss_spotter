@@ -57,7 +57,7 @@ const convertPrint = arrayOfTimes => {
   for (let time of arrayOfTimes) {
     const datetime = new Date(0);
     datetime.setUTCSeconds(time.risetime);
-    console.log(datetime.toString());
+    console.log(`Next pass at ${datetime.toString()} for ${time.duration} seconds.`);
 
     //console.log(`Next pass at ${datetime.setUTCSeconds(time.risetime)}`);
   }
