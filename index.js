@@ -26,15 +26,15 @@ const { fetchMyIP, fetchCoordsByIP, fetchISSFlyOverTimes } = require("./iss");
 //   console.log("It worked! Returned coordinates:", coords);
 // });
 
-let cood = {
+let coord = {
   "latitude": 49.26030,
   "longitude": -123.14600
 };
 
-fetchISSFlyOverTimes(cood, (error, time) => {
+fetchISSFlyOverTimes(coord, (error, time) => {
   if (error) {
     console.log("It didn't work:", error);
     return;
   }
-  console.log("It worked! ISS flies over at time:", time);
+  console.log("It worked! ISS flies over at time:  \n", time);
 });
